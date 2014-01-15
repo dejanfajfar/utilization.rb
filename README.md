@@ -1,4 +1,3 @@
-utilization.rb
-==============
+# utilization.rb
 
-A developer utillization tool
+A simple ruby based worker utilization tool with some statistical analysis at the end
