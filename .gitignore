@@ -16,3 +16,11 @@ tmp
 .yardoc
 _yardoc
 doc/
+.idea/.name
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/utilization.rb.iml
+.idea/vcs.xml
+.idea/workspace.xml
