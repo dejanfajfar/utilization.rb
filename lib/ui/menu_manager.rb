@@ -1,3 +1,5 @@
+module Ui
+
 require 'colorize'
 require 'yaml'
 
@@ -39,4 +41,5 @@ class MenuManager
     puts @loaded_menus[menu_name.to_sym]
     @loaded_menus[menu_name.to_sym]
   end
+end
 end
