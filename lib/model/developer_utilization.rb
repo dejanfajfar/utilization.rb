@@ -1,17 +1,17 @@
-include 'MongoMapper'
+require 'mongo_mapper'
 
 module Model
 class DeveloperUtilization
   include MongoMapper::Document
 
-  key :is_vacation, Boolean
-  key :is_missing, Boolean
+  key :is_vacation, Boolean, :default => false
+  key :is_missing, Boolean, :default => false
   key :date, Date, :required => true
   key :effort, Integer, :numeric => true
   key :comment, String
 
-  belongs_to :developer, :required => true
-  belongs_to :project
+  belongs_to :developer, :required => true, :class_name => 'Model::Developer'
+  belongs_to :project, :required => true, :class_name => 'Model::Project'
 
   validate :validate_utilization
 

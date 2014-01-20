@@ -1,4 +1,8 @@
 module Model
+
+  require 'mongo_mapper'
+  require_relative 'developer_utilization'
+
 class Developer
   include MongoMapper::Document
 
@@ -8,7 +12,7 @@ class Developer
   key :active, Boolean, :default => true
   key :department, String, :required => true
 
-  many :developer_utilization
+  many :developer_utilization, :class_name => 'Model::DeveloperUtilization'
 
 end
 end
