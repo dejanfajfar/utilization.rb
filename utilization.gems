@@ -1,0 +1,6 @@
+# utilization.gems generated gem export file. Note that any env variable settings will be missing. Append these after using a ';' field separator
+
+bson -v1.9.2
+bson_ext -v1.9.2
+mongo -v1.9.2
+mongo_mapper -v0.12.0
