@@ -8,10 +8,12 @@ class DeveloperUtilization
   key :is_missing, Boolean, :default => false
   key :date, Date, :required => true
   key :effort, Integer, :numeric => true
+  key :project, String, :required => true
   key :comment, String
 
+  timestamps!
+
   belongs_to :developer, :required => true, :class_name => 'Model::Developer'
-  belongs_to :project, :required => true, :class_name => 'Model::Project'
 
   validate :validate_utilization
 

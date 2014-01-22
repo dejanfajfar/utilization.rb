@@ -1,27 +1,21 @@
-require_relative "lib/model/developer"
-require_relative 'lib/model/developer_utilization'
-require_relative 'lib/model/project'
+require_relative "model/developer"
+require_relative 'model/developer_utilization'
+require_relative 'bl/configuration'
 require 'mongo_mapper'
 require 'mongo'
 
-MongoMapper.connection = Mongo::Connection.new('localhost', '27017')
-MongoMapper.database = 'utilization'
+config = Configuration.new
 
-#Create all needed projects
-project1 = Model::Project.new(:name => "Project01")
-project2 = Model::Project.new(:name => "Project02")
-project3 = Model::Project.new(:name => "Project03")
-
-project1.save!
-project2.save!
-project3.save!
+MongoMapper.connection = Mongo::Connection.new(config.db.host, config.db.port)
+MongoMapper.database = config.db.database
+puts config.db.host
 
 # Create the developer
 developer = Model::Developer.new(
     :name => 'Dejan',
     :surname => 'Fajfar',
     :short_name => 'DF',
-    :department => 'IT',
+    :department => 'IT'
 )
 
 developer.save!
@@ -31,10 +25,10 @@ developer.save!
 utilization = Model::DeveloperUtilization.new(
     :date => Time.now,
     :effort => 3,
-    :project => project2,
+    :project => 'Project2',
     :developer => developer
 )
 
 utilization.save!
 
-puts utilization.developer.name
+puts utilization.developer.active?
