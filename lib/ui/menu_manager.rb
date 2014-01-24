@@ -3,7 +3,7 @@ require 'yaml'
 
 class MenuManager
 
-  $menu_store = "../config/menus/"
+  $menu_store = "../../config/menus/"
 
   def initialize
     @loaded_menus = Hash.new
@@ -17,7 +17,7 @@ class MenuManager
       @active_menu = menu
 
       options.each do |key, option|
-        puts "[ " + key.dup.green + " ] " + option
+        puts "[ " + key.to_s.dup.green + " ] " + option
       end
 
     rescue LoadError => e
@@ -29,17 +29,13 @@ class MenuManager
     return nil if @active_menu.nil?
 
     print "=> " if not options[:silent]
-    selection = gets
+    selection = $stdin.readchar
 
-    selection
+    selection.delete("\n") # remove newline character that is added by "get". This can cause problems latter on
   end
 
   def valid_selection? selection, menu = @active_menu
-    puts selection
-    puts @loaded_menus[menu]
-    if @loaded_menus.has_key? menu
-      return @loaded_menus[menu].has_key?(selection.upcase) || @loaded_menus[menu].has_key?(selection)
-    end
+    @loaded_menus.key?(menu) && @loaded_menus[menu].key?(selection)
   end
 
   def set_active_menu menu
@@ -49,7 +45,7 @@ class MenuManager
   private
 
   def load_config menu_name
-    menu_config = "#{$menu_store}#{menu_name}.yaml"
+    menu_config = File.join __dir__, $menu_store, "#{menu_name}.yaml"
 
     raise LoadError, "#{menu_config} file not found" if not File.exists? menu_config
 
